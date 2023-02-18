@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import '../styles/skeleton.css'
 
-function Index() {
+export default function Index() {
     return (
         <div className="container">
             <h1>Welcome to Minimal Twitter</h1>
@@ -10,5 +10,3 @@ function Index() {
         </div>
       )
 }
-
-export default Index
