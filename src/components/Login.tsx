@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-export default function Register() {
+export default function Login() {
     return (
         <div>
-            <h1>Register</h1>
+            <h1>Login</h1>
             <form action="" method="post">
                 <fieldset>
                     <input type="text" placeholder="Enter username"/>
@@ -11,7 +11,7 @@ export default function Register() {
                 <fieldset>
                     <input type="password" placeholder="Password"/>
                 </fieldset>
-                <button type="submit">Register</button>
+                <button type="submit">Login</button>
             </form>
         </div>
     )
