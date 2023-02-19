@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Login from '../components/Login'
-import Register from '../components/Register'
+import { Register } from '../components/Register'
 import '../styles/skeleton.css'
 
 export default function Auth() {
