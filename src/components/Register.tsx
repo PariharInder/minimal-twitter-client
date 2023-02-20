@@ -1,5 +1,6 @@
 import { createUserWithEmailAndPassword, getAuth, UserCredential } from 'firebase/auth'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CreateNewUser } from '../services/CreateNewUser'
 
 export const Register = () => {
@@ -10,11 +11,13 @@ export const Register = () => {
     const [registrationError, setRegistrationError] = useState<string | null>(null)
     const [isRegistering, setIsRegistering] = useState<boolean>(false)
 
+    const navigate = useNavigate()
+    
     //Conncects to CreateNewUser service and registers the user
     const handleRegister = () => {
         setIsRegistering(true);
         CreateNewUser(email, password)
-        .then((userCredential)=> console.log("Successful Registration"))
+        .then((userCredential)=> navigate("/feed"))
         .catch((error)=>setRegistrationError(error.message))
         .finally(()=>setIsRegistering(false))
     }

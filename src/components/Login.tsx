@@ -1,19 +1,22 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { LoginUser } from '../services/LoginUser'
 
 export const Login = () => {
 
-    //Initialize state variables for user registration
+    //Initialize state variables for user login
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [loginError, setLoginError] = useState<string | null>(null)
     const [isLogginIn, setIsLoggingIn] = useState<boolean>(false)
 
-    //Conncects to CreateNewUser service and registers the user
+    const navigate = useNavigate()
+
+    //Conncects to LoginUser service and registers the user
     const handleLogin = () => {
         setIsLoggingIn(true);
         LoginUser(email, password)
-        .then((userCredential)=> console.log("Successful Login"))
+        .then((userCredential)=> navigate("/feed"))
         .catch((error)=>setLoginError(error.message))
         .finally(()=>setIsLoggingIn(false))
     }
