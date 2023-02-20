@@ -2,14 +2,14 @@ import { initializeApp } from 'firebase/app';
 
 // Web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDtZeoqPrOf-DOAw3DOzxnPSWfN6ldnATE",
-    authDomain: "minimal-twitter-d2dc2.firebaseapp.com",
-    projectId: "minimal-twitter-d2dc2",
-    storageBucket: "minimal-twitter-d2dc2.appspot.com",
-    messagingSenderId: "963857604715",
-    appId: "1:963857604715:web:fe19b211e07fed4b05d12e",
-    measurementId: "G-D8BLNNK6TC"
-  }
+  apiKey: "AIzaSyCJ5Rk9uwO8GKLuQWRhe8bXagNMUzfwerQ",
+  authDomain: "minimal-twitter-b4951.firebaseapp.com",
+  projectId: "minimal-twitter-b4951",
+  storageBucket: "minimal-twitter-b4951.appspot.com",
+  messagingSenderId: "8743048304",
+  appId: "1:8743048304:web:2c0d6bb72fcc6aae6150b5",
+  measurementId: "G-EPKHHZRGJ1"
+}
 
 export const app = initializeApp(firebaseConfig);
 
