@@ -6,6 +6,7 @@ import Index from './pages/Index'
 import Auth from './pages/Auth'
 import './styles/skeleton.css'
 import Feed from './pages/Feed'
+import { AuthContext } from './components/Login'
 
 function App() {
 
@@ -29,10 +30,14 @@ function App() {
 // Initialize Firebase
 const auth = getAuth(app)
 
+const [loggedIn, setLoggedIn] = useState(false)
+
   return (
+    <AuthContext.Provider value={{ loggedIn, setLoggedIn }}>
     <div className="App">
       <RouterProvider router={router} />
     </div>
+    </AuthContext.Provider>
   )
 }
 

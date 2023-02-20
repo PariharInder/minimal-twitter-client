@@ -1,6 +1,11 @@
-import { useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LoginUser } from '../services/LoginUser'
+
+export const AuthContext = createContext<{loggedIn: boolean; setLoggedIn: (loggedIn: boolean) => void}>({
+    loggedIn: false,
+    setLoggedIn: () => {}
+  })
 
 export const Login = () => {
 
@@ -12,13 +17,17 @@ export const Login = () => {
 
     const navigate = useNavigate()
 
+    const { setLoggedIn } = useContext(AuthContext)
+
     //Conncects to LoginUser service and registers the user
     const handleLogin = () => {
         setIsLoggingIn(true);
         LoginUser(email, password)
-        .then((userCredential)=> navigate("/feed"))
+        .then((userCredential)=> {
+            setLoggedIn(true) //Updates the login state
+            navigate("/feed")
+        })
         .catch((error)=>setLoginError(error.message))
-        .finally(()=>setIsLoggingIn(false))
     }
 
     return (
