@@ -4,7 +4,6 @@ import { app } from './services/Firebase'
 import { getAuth } from 'firebase/auth'
 import Index from './pages/Index'
 import Auth from './pages/Auth'
-import './styles/skeleton.css'
 import Feed from './pages/Feed'
 import { AuthContext } from './components/Login'
 
