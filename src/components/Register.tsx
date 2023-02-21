@@ -8,6 +8,7 @@ export const Register = () => {
     //Initialize state variables for user registration
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [confirmPassword, setComfirmPassword] = useState<string>('')
     const [registrationError, setRegistrationError] = useState<string | null>(null)
     const [isRegistering, setIsRegistering] = useState<boolean>(false)
 
@@ -15,6 +16,10 @@ export const Register = () => {
     
     //Conncects to CreateNewUser service and registers the user
     const handleRegister = () => {
+        if(confirmPassword!==password) {
+            setRegistrationError("Passwords don't match.")
+            return
+        }
         setIsRegistering(true);
         CreateNewUser(email, password)
         .then((userCredential)=> navigate("/feed"))
@@ -29,6 +34,7 @@ export const Register = () => {
                 <div className='p-4 mb-2'>
                     <input className='w-full m-2 rounded-xl h-8 placeholder:text-neutral-100 bg-neutral-900 shadow-sm border-solid text-white' type="text" placeholder="Enter username" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                     <input className='w-full m-2 rounded-xl h-8 placeholder:text-neutral-100 bg-neutral-900 shadow-sm border-solid text-white' type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input className='w-full m-2 rounded-xl h-8 placeholder:text-neutral-100 bg-neutral-900 shadow-sm border-solid text-white' type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setComfirmPassword(e.target.value)}/>
                 </div>
                 <div>
                     {registrationError && <p>{registrationError}</p>}
