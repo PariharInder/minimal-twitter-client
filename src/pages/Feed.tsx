@@ -1,4 +1,5 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../components/Login'
 import Post from '../components/Post'
 import Auth from './Auth'
@@ -6,17 +7,17 @@ import Auth from './Auth'
 export default function Feed() {
 
     const { loggedIn } = useContext(AuthContext)
-
+    const navigate = useNavigate()
+    if(!loggedIn) {
+        useEffect(() => {
+            navigate('/auth')
+          }, [navigate])
+    }
+    
     return (
-        <>
-        {loggedIn ? (
             <div>
             <h1>Feed</h1>
             <Post />
         </div>
-        ) : (
-            <><p>You are not logged In</p><Auth /></>
-        )}
-        </>
     )
 }
