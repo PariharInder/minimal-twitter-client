@@ -1,31 +1,37 @@
-import { useContext, useState, useEffect } from 'react';
-import { AuthContext } from '../components/Login';
-import { getAuth } from 'firebase/auth';
-import { app, db } from '../services/Firebase';
-import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { useContext, useState, useEffect } from 'react'
+import { AuthContext } from '../components/Login'
+import { getAuth } from 'firebase/auth'
+import { app, db } from '../services/Firebase'
+import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import { getStorage, ref } from 'firebase/storage'
 
 export const Profile = () => {
   const { loggedIn } = useContext(AuthContext);
   const [message, setMessage]= useState<string>('')
-  const [userData, setUserData] = useState<{ username?: string; email: string; gender?: string; birthday?: string } | null>(null);
+  const [userData, setUserData] = useState<{ username?: string; email: string; gender?: string; birthday?: string; photoURL?: string} | null>(null)
+  const [photoFile, setPhotoFile] = useState<File | null>(null)
+  const [photoURL, setPhotoURL] = useState<string | null>(null)
 
-  const auth = getAuth(app);
-  const usersCollectionRef = collection(db, 'users');
+  const auth = getAuth(app)
+  const storage = getStorage(app)
+  const usersCollectionRef = collection(db, 'users')
 
   useEffect(() => {
     const fetchData = async () => {
       if (loggedIn) {
         const currentUser = auth.currentUser;
+        const photoRef = currentUser ? ref(storage, `users/${currentUser.uid}/photo`) : null
         if (currentUser) {
-          const userDocRef = doc(usersCollectionRef, currentUser.uid);
-          const docSnap = await getDoc(userDocRef);
+          const userDocRef = doc(usersCollectionRef, currentUser.uid)
+          const docSnap = await getDoc(userDocRef)
           if (docSnap.exists()) {
-            const data = docSnap.data();
+            const data = docSnap.data()
             setUserData({
               username: data.username || '',
               email: currentUser.email || '',
               gender: data.gender || undefined,
               birthday: data.birthday || undefined,
+              photoURL: data.photoURL || null
             });
           } else {
             await setDoc(doc(usersCollectionRef, currentUser.uid), {
@@ -33,6 +39,7 @@ export const Profile = () => {
               email: currentUser.email || '',
               gender: null,
               birthday: null,
+              photoURL: null,
             })
           }
         }
@@ -56,6 +63,7 @@ export const Profile = () => {
   return (
     <div className="flex justify-center items-center h-full">
     <div className="bg-stone-900 p-6 rounded-lg shadow-xl w-5/6 lg:w-1/3 md:w-1/2 flex flex-col justify-center items-center h-full">
+      <img src={photoURL || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'} alt="profile-photo" className="w-1/4 border-r-2 m-10 rounded-xl"/>
       <div className="text-center mb-10">
         <h1 className="text-3xl font-bold mb-8 text-white">User Information</h1>
         <div className="flex flex-col items-center">
