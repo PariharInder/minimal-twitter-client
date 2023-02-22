@@ -7,6 +7,7 @@ import Auth from './pages/Auth'
 import Feed from './pages/Feed'
 import { AuthContext } from './components/Login'
 import './styles/tailwind.css'
+import { Profile } from './pages/Profile'
 
 function App() {
 
@@ -23,6 +24,10 @@ function App() {
     {
       path: "/feed",
       element: <Feed />
+    },
+    {
+      path: "/profile",
+      element: <Profile />
     }
   ])
 

@@ -25,7 +25,7 @@ export const Login = () => {
         LoginUser(email, password)
         .then((userCredential)=> {
             setLoggedIn(true) //Updates the login state
-            navigate("/feed")
+            navigate("/profile")
         })
         .catch((error)=>setLoginError(error.message))
     }
