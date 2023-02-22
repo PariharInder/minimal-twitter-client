@@ -22,7 +22,7 @@ export const Register = () => {
         }
         setIsRegistering(true);
         CreateNewUser(email, password)
-        .then((userCredential)=> navigate("/feed"))
+        .then((userCredential)=> navigate("/profile"))
         .catch((error)=>setRegistrationError(error.message))
         .finally(()=>setIsRegistering(false))
     }

@@ -1,4 +1,5 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from "firebase/firestore"
 
 // Web app's Firebase configuration
 const firebaseConfig = {
@@ -11,7 +12,8 @@ const firebaseConfig = {
   measurementId: "G-EPKHHZRGJ1"
 }
 
-export const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig)
+export const db = getFirestore(app)
 
 export default function FirebaseApp() {
   return null;
